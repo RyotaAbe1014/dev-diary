@@ -4,14 +4,16 @@ import { Label } from "@/lib/components/ui/label"
 import { Input } from "@/lib/components/ui/input"
 import Link from "next/link"
 import { Button } from "@/lib/components/ui/button"
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { login } from "@/features/auth/actions/login";
 
 export function LoginView() {
+  const [isPending, startTransition] = useTransition();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    console.log(email, password);
-    // TODO: ログイン機能を実装する
+    event.preventDefault();
+    startTransition(() => {
+      login(email, password);
+    });
   }
 
   const [email, setEmail] = useState('');
@@ -36,7 +38,7 @@ export function LoginView() {
               </div>
               <Input id="password" placeholder="Enter your password" required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <Button className="w-full" type="submit">
+            <Button className="w-full" type="submit" disabled={isPending || !email || !password}>
               Login
             </Button>
           </div>
