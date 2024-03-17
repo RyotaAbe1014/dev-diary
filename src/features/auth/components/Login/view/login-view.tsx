@@ -9,6 +9,7 @@ import { login } from "@/features/auth/actions/login";
 
 export function LoginView() {
   const [isPending, startTransition] = useTransition();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     startTransition(() => {
