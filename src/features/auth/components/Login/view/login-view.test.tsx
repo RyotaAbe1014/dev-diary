@@ -79,4 +79,22 @@ describe('LoginView', () => {
     expect(login).toHaveBeenCalled();
   });
 
+  test('エラーがある場合、エラーメッセージが表示されること', async () => {
+    // given
+    (login as jest.Mock).mockResolvedValue(['エラー']);
+    render(<LoginView />);
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Password');
+    await user.type(emailInput, 'aaa@aaa.com');
+    await user.type(passwordInput, 'a');
+
+    const loginButton = screen.getByRole('button', { name: 'Login' });
+
+    // when
+    await user.click(loginButton);
+
+    // then
+    const errorMessage = await screen.findByText('・エラー');
+    expect(errorMessage).toBeInTheDocument();
+  });
 });
