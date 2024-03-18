@@ -71,7 +71,6 @@ describe('LoginView', () => {
     await user.type(passwordInput, 'a');
 
     const loginButton = screen.getByRole('button', { name: 'Login' });
-    console.log(loginButton);
 
     // when
     await user.click(loginButton);
