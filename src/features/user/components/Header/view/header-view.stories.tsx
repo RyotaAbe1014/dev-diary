@@ -13,8 +13,8 @@ type Story = StoryObj<typeof HeaderView>;
 
 export const Home: Story = {
   args: {
-    pathName: "user"
+    pathName: "Home"
   },
 
-  render: ({pathName}) => <HeaderView pathName='pathName'/>,
+  render: ({pathName}) => <HeaderView pathName={pathName}/>,
 };
