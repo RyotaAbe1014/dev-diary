@@ -1,4 +1,3 @@
-import { Login } from "@/features/auth/components/Login/login";
 import Link from "next/link";
 
 export default function Page() {

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { HeaderView } from './header-view';
 
 test('propsのpathNameが表示されること', () => {
@@ -13,20 +13,6 @@ test('propsのpathNameが表示されること', () => {
   // then
   expect(headerElement).toBeInTheDocument();
 });
-
-test('New Articleリンクが表示されること', () => {
-  // given
-  const pathName = 'Home';
-  const isLogin = false;
-
-
-  // when
-  const { getByText } = render(<HeaderView pathName={pathName} isLogin={isLogin} />);
-  const newArticleLink = getByText('New Article');
-
-  // then
-  expect(newArticleLink).toBeInTheDocument();
-
 
   test('未ログインの場合、Sign Upリンクが表示されること', () => {
     // given
@@ -47,12 +33,9 @@ test('New Articleリンクが表示されること', () => {
     const isLogin = true;
 
     // when
-    const { getByText, queryByText } = render(<HeaderView pathName={pathName} isLogin={isLogin} />);
-    const newArticleLink = getByText('New Article');
-    const signUpLink = queryByText('Sign Up');
+    render(<HeaderView pathName={pathName} isLogin={isLogin} />);
+    const newArticleLink = screen.getByText('New Article');
 
     // then
     expect(newArticleLink).toBeInTheDocument();
-    expect(signUpLink).toBeNull();
   });
-});

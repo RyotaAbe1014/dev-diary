@@ -2,14 +2,14 @@
 
 import { usePathname } from "next/navigation";
 import { HeaderView } from "./view/header-view";
-import { cookies } from "next/headers";
 
-export function Header() {
+export type HeaderProps = {
+  isLogin: boolean;
+};
+
+export function Header({isLogin}: HeaderProps) {
   const url = usePathname();
-  const token = cookies().get('token')?.value;
-
-
   return (
-    <HeaderView pathName={url} isLogin={!!token} />
+    <HeaderView pathName={url} isLogin={isLogin} />
   );
 }
