@@ -3,7 +3,7 @@
  * @see https://v0.dev/t/KXsgI3U1vsI
  */
 import { UserArticle } from "@/features/article/types/UserArticle"
-import Link from "next/link"
+import { UserArticleListItem } from "../../UserArticleListItem/user-article-list-item"
 
 export type UserArticleListViewProps = {
   userArticles: UserArticle[]
@@ -17,18 +17,11 @@ export function UserArticleListView({ userArticles }: UserArticleListViewProps) 
       </div>
       <main className="flex-1 py-4 md:py-6">
         <div className="container grid max-w-6xl gap-4 px-4 md:px-6">
+          {userArticles.length === 0 && (
+            <p>No articles found.</p>
+          )}
           {userArticles.map((article) => (
-            <Link
-              key={article.id}
-              href={`/user/articles/${article.id}`}
-              className="flex items-start gap-4 p-4 rounded-lg border border-slate-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-slate-800"
-            >
-              <div className="grid items-start gap-1">
-                <h2 className="text-xl font-semibold">{article.title}</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Published on {article.publishedAt}</p>
-                <p className="text-sm">{article.description}</p>
-              </div>
-            </Link>
+            <UserArticleListItem key={article.id} userArticle={article} />
           ))}
         </div>
       </main>
