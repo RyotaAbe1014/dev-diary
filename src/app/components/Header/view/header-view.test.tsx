@@ -27,15 +27,15 @@ test('propsのpathNameが表示されること', () => {
     expect(signUpLink).toBeInTheDocument();
   });
 
-  test('ログイン済の場合、New Articleリンクが表示されること', () => {
+  test('ログイン済の場合、Menuボタンが表示されること', () => {
     // given
     const pathName = 'Home';
     const isLogin = true;
 
     // when
     render(<HeaderView pathName={pathName} isLogin={isLogin} />);
-    const newArticleLink = screen.getByText('New Article');
+    const openLink = screen.getByRole('button', { name: 'Menu' });
 
     // then
-    expect(newArticleLink).toBeInTheDocument();
+    expect(openLink).toBeInTheDocument();
   });
