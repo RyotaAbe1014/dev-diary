@@ -1,10 +1,9 @@
 'use client';
-
-import { Label } from "@/lib/components/ui/label"
-import { Input } from "@/lib/components/ui/input"
+import { useState, useTransition } from "react";
 import Link from "next/link"
+import { Input } from "@/lib/components/ui/input"
+import { Label } from "@/lib/components/ui/label"
 import { Button } from "@/lib/components/ui/button"
-import { useEffect, useState, useTransition } from "react";
 import { login } from "@/features/auth/actions/login";
 import { LoginErrorCard } from "../../LoginErrorCard/login-error-card";
 

@@ -15,11 +15,11 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex flex-col gap-4 p-4 rounded-lg border hover:bg-gray-100 dark:hover:bg-gray-800">
-          <Link className="text-xl font-semibold" href="#">
-            Article Menu
-          </Link>
-          <Link className="text-sm text-gray-500 dark:text-gray-400" href="#">
-            Article menu description or actions
+          <Link href="/user/article">
+            <p className="text-xl font-semibold" >Article Menu</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Article menu description or actions
+            </p>
           </Link>
         </div>
       </div>
