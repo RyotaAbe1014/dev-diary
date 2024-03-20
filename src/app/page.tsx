@@ -1,13 +1,11 @@
-import { Button } from "@/lib/components/ui/button";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
-
-export default function Home() {
-  redirect('/auth/login');
-  return (
-    <>
-      <Button>Click me</Button>
-    </>
-  );
+export default function Page() {
+  const token = cookies().get('token')?.value;
+  if (!token) {
+    redirect('/auth/login');
+  } else {
+    redirect('/user');
+  }
 }
