@@ -19,8 +19,12 @@ export function ActionMenu() {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Link href="detail/">
         <DropdownMenuItem>Profile</DropdownMenuItem>
+        </Link>
+        <Link href="article/create/">
         <DropdownMenuItem>New Article</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu >
   );
