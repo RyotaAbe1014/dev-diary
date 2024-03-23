@@ -19,10 +19,10 @@ export function ActionMenu() {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="detail/">
+        <Link href="user/detail/">
         <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
-        <Link href="article/create/">
+        <Link href="user/article/create/">
         <DropdownMenuItem>New Article</DropdownMenuItem>
         </Link>
       </DropdownMenuContent>
