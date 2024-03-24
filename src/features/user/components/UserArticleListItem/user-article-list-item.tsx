@@ -13,7 +13,7 @@ export function UserArticleListItem({ userArticle }: UserArticleListItemProps) {
   return (
     <Link
       key={userArticle.id}
-      href={`/user/articles/${userArticle.id}`}
+      href={`/user/article/${userArticle.id}`}
       className="flex items-start gap-4 p-4 rounded-lg border border-slate-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-slate-800"
     >
       <div className="grid items-start gap-1">
