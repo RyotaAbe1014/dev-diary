@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { Header } from "../components/Header/header"
+import { Header } from "../../components/Header/header"
 export default function Layout({
   children,
 }: {
