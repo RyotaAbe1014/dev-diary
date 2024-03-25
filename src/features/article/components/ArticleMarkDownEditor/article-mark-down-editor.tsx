@@ -32,6 +32,8 @@ export function ArticleMarkDownEditor() {
     <div>
       <Markdown
         children={text}
+        className='markdown'
+        remarkPlugins={[remarkGfm]}
         components={{
           code(props) {
             const { children, className, node, ...rest } = props
