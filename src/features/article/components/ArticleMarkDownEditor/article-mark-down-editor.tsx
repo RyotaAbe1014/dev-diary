@@ -5,15 +5,16 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Textarea } from '@/lib/components/ui/textarea';
 
 export function ArticleMarkDownEditor() {
   const [text, setText] = useState('');
   return (
-    <div>
-      <textarea value={text} onChange={(e) => setText(e.target.value)} className='w-full h-96' placeholder='Write something here...'></textarea>
+    <div className='flex gap-4 h-[calc(100vh-4rem)]'>
+      <Textarea value={text} onChange={(e) => setText(e.target.value)} className='resize-none w-1/2' placeholder='Write something here...' />
       <Markdown
         children={text}
-        className='markdown'
+        className='markdown w-1/2 p-4 rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto'
         remarkPlugins={[remarkGfm]}
         components={{
           code(props) {
