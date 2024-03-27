@@ -1,19 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Textarea } from '@/lib/components/ui/textarea';
 
-export function ArticleMarkDownEditor() {
-  const [text, setText] = useState('');
+export type ArticleMarkDownEditorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export function ArticleMarkDownEditor({ value, onChange }: ArticleMarkDownEditorProps) {
   return (
     <div className='flex gap-4 h-[calc(100vh-4rem)]'>
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} className='resize-none w-1/2' placeholder='Write something here...' />
+      <Textarea value={value} onChange={(e) => onChange(e.target.value)} className='resize-none w-1/2' placeholder='Write something here...' />
       <Markdown
-        children={text}
+        children={value}
         className='markdown w-1/2 p-4 rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto'
         remarkPlugins={[remarkGfm]}
         components={{
