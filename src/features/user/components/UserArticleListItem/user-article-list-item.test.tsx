@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { expect, test } from "vitest";
 import { UserArticleListItem } from "./user-article-list-item";
 
 const mockUserArticle = {
@@ -24,5 +25,5 @@ test("リンクが正しく設定されていること", () => {
   const linkElement = screen.getByRole("link");
 
   // then
-  expect(linkElement).toHaveAttribute("href", "/user/articles/1");
+  expect(linkElement).toHaveAttribute("href", "/user/article/1");
 });
