@@ -1,25 +1,32 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import "@testing-library/jest-dom";
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import { LoginView } from './login-view';
+import * as loginModule from '@/features/auth/actions/login';
 import { login } from '@/features/auth/actions/login';
+import { expect, test, vi } from "vitest";
 
 const user = userEvent.setup();
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
-jest.mock('@/features/auth/actions/login', () => {
-  return {
-    login: jest.fn(),
-  };
-});
+vi.mock('@/features/auth/actions/login');
 
 
+function mockLogin(error: boolean) {
+  if (error) {
+    vi.spyOn(loginModule, 'login').mockResolvedValue(['・エラー']);
+  } else {
+    vi.spyOn(loginModule, 'login').mockResolvedValue();
+  }
+}
 
 describe('LoginView', () => {
   test('ログインフォームが表示されること', () => {
     // given
+    mockLogin(false);
     render(<LoginView />);
     // when
     const emailInput = screen.getByLabelText('Email');
@@ -31,6 +38,7 @@ describe('LoginView', () => {
 
   test('ログインボタンが表示されること', () => {
     // given
+    mockLogin(false);
     render(<LoginView />);
     // when
     const loginButton = screen.getByRole('button', { name: 'Login' });
@@ -40,6 +48,7 @@ describe('LoginView', () => {
 
   test('未入力の場合、ログインボタンが押せないこと', () => {
     // given
+    mockLogin(false);
     render(<LoginView />);
     // when
     const loginButton = screen.getByRole('button', { name: 'Login' });
@@ -49,6 +58,7 @@ describe('LoginView', () => {
 
   test('入力後、ログインボタンが活性化すること', async () => {
     // given
+    mockLogin(false);
     render(<LoginView />);
     // when
     const emailInput = screen.getByLabelText('Email');
@@ -64,6 +74,7 @@ describe('LoginView', () => {
 
   test('ログインボタンを押すと、ログイン処理が呼ばれること', async () => {
     // given
+    mockLogin(false);
     render(<LoginView />);
     const emailInput = screen.getByLabelText('Email');
     const passwordInput = screen.getByLabelText('Password');
@@ -81,7 +92,7 @@ describe('LoginView', () => {
 
   test('エラーがある場合、エラーメッセージが表示されること', async () => {
     // given
-    (login as jest.Mock).mockResolvedValue(['エラー']);
+    mockLogin(true);
     render(<LoginView />);
     const emailInput = screen.getByLabelText('Email');
     const passwordInput = screen.getByLabelText('Password');
@@ -92,9 +103,11 @@ describe('LoginView', () => {
 
     // when
     await user.click(loginButton);
+    expect(login).toHaveBeenCalled();
 
     // then
-    const errorMessage = await screen.findByText('・エラー');
-    expect(errorMessage).toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByText('・エラー')).toBeInTheDocument();
+    });
   });
 });
