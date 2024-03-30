@@ -19,7 +19,7 @@ export const Home: Story = {
 
   render: ({pathName}) => <HeaderView pathName={pathName} isLogin={false} />,
 };
-export const isLogin: Story = {
+export const IsLogin: Story = {
   args: {
     pathName: "Home",
     isLogin: true,
