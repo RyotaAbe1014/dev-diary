@@ -1,5 +1,6 @@
 'use client';
 
+import { logout } from "@/features/auth/actions/logout";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -20,11 +21,16 @@ export function ActionMenu() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="user/detail/">
-        <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
         <Link href="user/article/create/">
-        <DropdownMenuItem>New Article</DropdownMenuItem>
+          <DropdownMenuItem>New Article</DropdownMenuItem>
         </Link>
+        <DropdownMenuItem onClick={() => {
+          logout();
+        }}>
+            logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu >
   );
