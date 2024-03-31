@@ -23,6 +23,10 @@ export function UserArticleDetailDialog({ articleDetail }: UserArticleDetailDial
     // TODO: Save action
     setIsEdit(false);
   };
+  const handleDelete = () => {
+    // TODO: Delete action
+    router.back();
+  };
 
   return (
     <Dialog
@@ -33,7 +37,7 @@ export function UserArticleDetailDialog({ articleDetail }: UserArticleDetailDial
       }}
     >
       <DialogContent className="min-w-full">
-        <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} />
+        <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
       </DialogContent>
     </Dialog>
   )

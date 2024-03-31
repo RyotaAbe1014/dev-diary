@@ -13,9 +13,10 @@ type UserArticleDetailDialogProps = {
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
   handleSave: () => void;
+  handleDelete: () => void;
 };
 
-export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdit, handleSave }: UserArticleDetailDialogProps) {
+export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdit, handleSave, handleDelete }: UserArticleDetailDialogProps) {
   const [title, setTitle] = useState(articleDetail.title);
   const [description, setDescription] = useState(articleDetail.description);
   const [text, setText] = useState(articleDetail.content);
@@ -30,7 +31,7 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
         >
           {isEdit ? "Cancel" : "Edit"}
         </Button>
-        {isEdit && (
+        {isEdit ? (
           <Button
             className="ml-2"
             variant="outline"
@@ -40,7 +41,16 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
           >
             Save
           </Button>
-        )}
+        ) :
+          <Button
+            className="ml-2"
+            variant="destructive"
+            onClick={() => {
+              handleDelete();
+            }}
+          >
+            Delete
+          </Button>}
       </div>
       <div className="h-36">
         {isEdit ? (

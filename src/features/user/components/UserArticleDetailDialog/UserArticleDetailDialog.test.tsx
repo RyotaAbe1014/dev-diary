@@ -1,9 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { UserArticleDetailDialog } from "./UserArticleDetailDialog";
 import { vi } from "vitest";
+import { useRouter } from "next/navigation";
 
 vi.mock("next/navigation", () => ({
-  useRouter: vi.fn(),
+  useRouter: () => ({
+    back: vi.fn(),
+  }),
 }));
 
 describe("UserArticleDetailDialog", () => {
@@ -47,5 +50,15 @@ describe("UserArticleDetailDialog", () => {
 
     const cancelButton = screen.queryByText("Cancel");
     expect(cancelButton).not.toBeInTheDocument();
+  });
+
+  test.skip("Deleteボタンをクリックすると記事が削除される", () => {
+    render(<UserArticleDetailDialog articleDetail={articleDetail} />);
+
+    const deleteButton = screen.getByText("Delete");
+    fireEvent.click(deleteButton);
+
+    // TODO: アクションの関数をmockしてテストする
+    // expect().toHaveBeenCalled();
   });
 });
