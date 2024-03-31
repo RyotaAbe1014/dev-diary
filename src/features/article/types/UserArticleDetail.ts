@@ -3,5 +3,5 @@ export type UserArticleDetail = {
     title: string
     publishedAt?: string
     description?: string
-    // TODO: add properties
+    content: string
 }
