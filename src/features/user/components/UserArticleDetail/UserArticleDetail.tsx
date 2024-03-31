@@ -19,9 +19,14 @@ export function UserArticleDetail({ articleDetail }: UserArticleDetailProps) {
     router.back();
   };
 
+  const handleDelete = () => {
+    // TODO: Delete action
+    router.back();
+  };
+
   return (
     <>
-    <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} />
+    <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
     </>
   )
 }
