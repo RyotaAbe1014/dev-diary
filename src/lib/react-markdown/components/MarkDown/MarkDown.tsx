@@ -8,14 +8,15 @@ import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export type MarkDownProps = {
   value: string;
+  className?: string;
 };
 
-export function MarkDown({ value }: MarkDownProps) {
+export function MarkDown({ value, className }: MarkDownProps) {
   return (
       <Markdown
         // eslint-disable-next-line react/no-children-prop
         children={value}
-        className='markdown p-4 rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto'
+        className={`markdown ${className}`}
         remarkPlugins={[remarkGfm]}
         components={{
           code(props) {
@@ -23,6 +24,7 @@ export function MarkDown({ value }: MarkDownProps) {
             const match = /language-(\w+)/.exec(className || '')
             return match ? (
               <SyntaxHighlighter
+              data-testid="code"
                 PreTag="div"
                 // eslint-disable-next-line react/no-children-prop
                 children={String(children).replace(/\n$/, '')}
@@ -30,7 +32,7 @@ export function MarkDown({ value }: MarkDownProps) {
                 style={materialDark}
               />
             ) : (
-              <code {...rest} className={className}>
+              <code {...rest} className={className} data-testid="code">
                 {children}
               </code>
             )
