@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import { GlobalSpinner } from "@/utils/Loader/GlobalSpinner/GlobalSpinner";
+import { GlobalSpinner } from "@/utils/Loader/components/GlobalSpinner/GlobalSpinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
