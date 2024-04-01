@@ -1,15 +1,15 @@
 
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { GlobalSpinner } from './GlobalSpinner';
+import { GlobalSpinnerView } from './GlobalSpinnerView';
 
-const meta: Meta<typeof GlobalSpinner> = {
+const meta: Meta<typeof GlobalSpinnerView> = {
   title: "utils/GlobalSpinner",
-  component: GlobalSpinner,
+  component: GlobalSpinnerView,
 };
 
 export default meta;
-type Story = StoryObj<typeof GlobalSpinner>;
+type Story = StoryObj<typeof GlobalSpinnerView>;
 
 export const Default: Story = {
   render: () => {
@@ -18,7 +18,7 @@ export const Default: Story = {
       <p>
         画面全体を覆うローディングスピナーです。
       </p>
-      <GlobalSpinner />
+      <GlobalSpinnerView />
       </>
     );
   }
