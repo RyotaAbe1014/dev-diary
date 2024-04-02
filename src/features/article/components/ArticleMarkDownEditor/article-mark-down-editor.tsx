@@ -12,7 +12,7 @@ export type ArticleMarkDownEditorProps = {
 export function ArticleMarkDownEditor({ value, onChange }: ArticleMarkDownEditorProps) {
   return (
     <div className='flex gap-4 h-max'>
-      <Textarea value={value} onChange={(e) => onChange(e.target.value)} className='resize-none w-1/2' placeholder='Write something here...' />
+      <Textarea value={value} onChange={(e) => onChange(e.target.value)} className='resize-none w-1/2' placeholder='# Hello world!' />
       <MarkDown value={value} className='w-1/2 p-2 rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto' />
     </div >
   )
