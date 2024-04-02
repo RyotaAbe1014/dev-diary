@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { Header } from "../../components/Header/header"
 import { redirect } from "next/navigation";
+
 export default function Layout({
   children,
 }: {
