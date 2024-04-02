@@ -20,10 +20,10 @@ export function ActionMenu() {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="user/detail/">
+        <Link href="/user/detail/">
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
-        <Link href="user/article/create/">
+        <Link href="/user/article/create/">
           <DropdownMenuItem>New Article</DropdownMenuItem>
         </Link>
         <DropdownMenuItem onClick={() => {

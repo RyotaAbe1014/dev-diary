@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import { GlobalSpinner } from "@/utils/Loader/components/GlobalSpinner/GlobalSpinner";
+import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <GlobalSpinner />
+        <Provider>
+          {children}
+          <GlobalSpinner />
+        </Provider>
       </body>
     </html>
   );

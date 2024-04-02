@@ -14,6 +14,7 @@ export default async function Page({
     content: "# Hello World \n This is a markdown component. \n ```javascript \n console.log('Hello, World!'); \n ```",
   }
 
+  console.log("モーダル");
   return (
     <>
     <UserArticleDetailDialog articleDetail={articleDetail} />
