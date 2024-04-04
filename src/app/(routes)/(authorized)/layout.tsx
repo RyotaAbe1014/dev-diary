@@ -1,19 +1,22 @@
 import { cookies } from "next/headers";
 import { Header } from "../../components/Header/header"
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const token = cookies().get('token')?.value
-  if (!token) {
-    redirect('/auth/login');
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/')
   }
+  console.log(data)
   return (
     <div className="flex flex-col min-h-screen">
-      <Header isLogin={!!token} />
+      <Header isLogin={!!data?.user} />
       <main className="flex-1 py-4 md:py-6">
         {children}
       </main>
