@@ -9,11 +9,10 @@ export default async function Layout({
   children: React.ReactNode
 }) {
   const supabase = createClient();
-  const { data, error } = await supabase.auth.getUser()
+  const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect('/')
+    redirect('/auth/login');
   }
-  console.log(data)
   return (
     <div className="flex flex-col min-h-screen">
       <Header isLogin={!!data?.user} />

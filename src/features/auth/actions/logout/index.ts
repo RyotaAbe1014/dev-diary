@@ -1,8 +1,11 @@
 'use server';
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+
 
 export async function logout() {
-    cookies().set('token', '', { httpOnly: true, secure: true, sameSite: 'strict' });
-    redirect('/auth/login');
+  const supabase = createClient();
+  await supabase.auth.signOut();
+
+  redirect('/auth/login');
 }
