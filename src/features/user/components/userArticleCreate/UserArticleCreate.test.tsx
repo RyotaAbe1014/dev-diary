@@ -1,6 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { vi } from "vitest";
-import { useRouter } from "next/navigation";
 import { UserArticleCreate } from './UserArticleCreate';
 
 vi.mock("next/navigation", () => ({
