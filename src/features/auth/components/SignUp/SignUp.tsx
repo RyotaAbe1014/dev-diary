@@ -1,7 +1,7 @@
-import { LoginView } from "../Login/view/login-view";
+import { SignUpView } from "./view/SignUpView";
 
 export function SignUp() {
   return (
-    <LoginView />
+    <SignUpView />
   )
 }

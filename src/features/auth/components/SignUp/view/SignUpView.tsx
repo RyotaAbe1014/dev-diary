@@ -1,9 +1,9 @@
 'use client';
 import { useState, useTransition } from "react";
 import { AuthForm } from "../../AuthForm/AuthForm";
-import { login } from "@/features/auth/actions/login";
+import { signUp } from "@/features/auth/actions/signUp";
 
-export function LoginView() {
+export function SignUpView() {
   const [isPending, startTransition] = useTransition();
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -14,13 +14,13 @@ export function LoginView() {
     const password = formData.get('password') as string;
     setErrors([]);
     startTransition(async () => {
-      const result = await login(email, password);
+      const result = await signUp(email, password);
       if (result && result.length > 0) {
         setErrors(result);
       }
     });
   };
   return (
-    <AuthForm isLoginPage={true} onSubmit={handleSubmit} errors={errors} isPending={isPending} />
+    <AuthForm isLoginPage={false} onSubmit={handleSubmit} errors={errors} isPending={isPending} />
   )
 }
