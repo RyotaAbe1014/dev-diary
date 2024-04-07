@@ -7,10 +7,10 @@ import { Button } from "@/lib/components/ui/button"
 import { LoginErrorCard } from "../LoginErrorCard/login-error-card";
 
 export type AuthFormProps = {
-    isLoginPage: boolean;
-    onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-    errors: string[];
-    isPending: boolean;
+  isLoginPage: boolean;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  errors: string[];
+  isPending: boolean;
 }
 
 export function AuthForm({ isLoginPage, onSubmit, errors, isPending }: AuthFormProps) {
@@ -20,8 +20,17 @@ export function AuthForm({ isLoginPage, onSubmit, errors, isPending }: AuthFormP
     <div className="flex items-center min-h-screen p-4">
       <div className="w-full max-w-sm mx-auto space-y-4">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold">Log in to your account</h1>
-          <p className="text-sm font-medium leading-none text-gray-500">Enter your information below</p>
+          {isLoginPage ? (
+            <>
+              <h1 className="text-3xl font-bold">Log in to your account</h1>
+              <p className="text-sm font-medium leading-none text-gray-500">Enter your information below</p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-3xl font-bold">Create an account</h1>
+              <p className="text-sm font-medium leading-none text-gray-500">Enter your information below</p>
+            </>
+          )}
         </div>
         {errors.length > 0 && (
           <LoginErrorCard errors={errors} />
@@ -39,15 +48,26 @@ export function AuthForm({ isLoginPage, onSubmit, errors, isPending }: AuthFormP
               <Input id="password" placeholder="Enter your password" required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <Button className="w-full" type="submit" disabled={isPending || !email || !password}>
-              Login
+              {isPending ? 'Loading...' : isLoginPage ? 'Log in' : 'Sign up'}
             </Button>
           </div>
         </form>
         <div className="flex items-center justify-center space-x-2">
-          <p className="text-sm text-gray-500">アカウントをお持ちでないですか？</p>
-          <Link className="font-medium underline" href="/auth/sign-up" prefetch={true}>
-            Sign up
-          </Link>
+          {isLoginPage ? (
+            <>
+              <p className="text-sm text-gray-500">アカウントをお持ちでないですか？</p>
+              <Link className="font-medium underline" href="/auth/sign-up" prefetch={true}>
+                Sign up
+              </Link>
+            </>
+          ) : (
+            <>
+              <p className="text-sm text-gray-500">アカウントをお持ちですか？</p>
+              <Link className="font-medium underline" href="/auth/login" prefetch={true}>
+                Log in
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
