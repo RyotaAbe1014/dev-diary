@@ -5,11 +5,12 @@ import { HeaderView } from "./view/header-view";
 
 export type HeaderProps = {
   isLogin: boolean;
+  email?: string;
 };
 
-export function Header({isLogin}: HeaderProps) {
+export function Header({isLogin, email}: HeaderProps) {
   const url = usePathname();
   return (
-    <HeaderView pathName={url} isLogin={isLogin} />
+    <HeaderView pathName={url} isLogin={isLogin} email={email} />
   );
 }

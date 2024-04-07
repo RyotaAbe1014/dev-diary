@@ -15,7 +15,7 @@ export default async function Layout({
   }
   return (
     <div className="flex flex-col min-h-screen">
-      <Header isLogin={!!data?.user} />
+      <Header isLogin={!!data?.user} email={data?.user?.email} />
       <main className="flex-1 py-4 md:py-6">
         {children}
       </main>
