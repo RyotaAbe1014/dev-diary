@@ -8,9 +8,11 @@ export function LoginView() {
   const [errors, setErrors] = useState<string[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const email = event.currentTarget.email.value;
-    const password = event.currentTarget.password.value;
     event.preventDefault();
+    // FormData インスタンスを作成し、フォームのデータを取得
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
     setErrors([]);
     startTransition(async () => {
       const result = await login(email, password);

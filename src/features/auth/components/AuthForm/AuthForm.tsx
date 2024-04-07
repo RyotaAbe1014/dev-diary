@@ -39,13 +39,13 @@ export function AuthForm({ isLoginPage, onSubmit, errors, isPending }: AuthFormP
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="m@example.com" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Input id="email" name="email" placeholder="m@example.com" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input id="password" placeholder="Enter your password" required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <Input id="password" name="password" placeholder="Enter your password" required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <Button className="w-full" type="submit" disabled={isPending || !email || !password}>
               {isPending ? 'Loading...' : isLoginPage ? 'Log in' : 'Sign up'}
