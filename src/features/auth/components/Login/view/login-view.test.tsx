@@ -41,7 +41,7 @@ describe('LoginView', () => {
     mockLogin(false);
     render(<LoginView />);
     // when
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
     // then
     expect(loginButton).toBeInTheDocument();
   });
@@ -51,7 +51,7 @@ describe('LoginView', () => {
     mockLogin(false);
     render(<LoginView />);
     // when
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
     // then
     expect(loginButton).toBeDisabled();
   });
@@ -66,7 +66,7 @@ describe('LoginView', () => {
     await user.type(emailInput, 'a');
     await user.type(passwordInput, 'a');
 
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
 
     // then
     expect(loginButton).toBeEnabled();
@@ -81,7 +81,7 @@ describe('LoginView', () => {
     await user.type(emailInput, 'a@a.com');
     await user.type(passwordInput, 'a');
 
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
 
     // when
     await user.click(loginButton);
@@ -99,7 +99,7 @@ describe('LoginView', () => {
     await user.type(emailInput, 'aaa@aaa.com');
     await user.type(passwordInput, 'a');
 
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
 
     // when
     await user.click(loginButton);
