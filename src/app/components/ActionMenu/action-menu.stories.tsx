@@ -12,5 +12,8 @@ export default meta;
 type Story = StoryObj<typeof ActionMenu>;
 
 export const Default: Story = {
-  render: () => <ActionMenu/>,
+  render: () => <ActionMenu />,
+};
+export const Email: Story = {
+  render: () => <ActionMenu email="test@test.com" />,
 };
