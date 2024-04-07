@@ -57,4 +57,18 @@ describe("ActionMenu", () => {
     // then
     expect(logout).toHaveBeenCalled();
   });
+
+  test('emailが渡された場合、emailが表示される', async() => {
+    // given
+    const email = "test@test.com";
+    render(<ActionMenu email={email} />);
+    const menuTrigger = screen.getByRole("button", { name: "Menu" });
+
+    // when
+    await user.click(menuTrigger);
+    const emailElement = screen.getByText(email);
+
+    // then
+    expect(emailElement).toBeInTheDocument();
+  });
 });
