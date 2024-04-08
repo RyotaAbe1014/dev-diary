@@ -13,11 +13,17 @@ export function UserArticleCreate() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [text, setText] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string[]>([]);
 
   return (
     <div className="container grid px-4 md:px-6">
-      {error && <div className="text-red-500">{error}</div>}
+      {error &&
+        <div className="text-red-500">
+          {error.map((message, index) => (
+            <div key={index}>{message}</div>
+          ))}
+        </div>
+      }
       <div className="flex justify-end">
         <Button
           variant="link"
