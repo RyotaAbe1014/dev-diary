@@ -28,7 +28,6 @@ export function UserArticleCreate() {
         <Button
           variant="link"
           onClick={() => {
-            // TODO: 未保存の場合は確認ダイアログを表示する
             back();
           }}
         >
