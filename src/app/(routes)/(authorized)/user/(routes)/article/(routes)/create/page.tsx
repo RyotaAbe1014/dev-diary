@@ -1,4 +1,4 @@
-import { UserArticleCreate } from "@/features/user/components/userArticleCreate/UserArticleCreate";
+import { UserArticleCreate } from "@/features/user/components/UserArticleCreate/UserArticleCreate";
 
 export default function Page() {
   return (
