@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { Header } from "../../components/Header/header"
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
