@@ -25,5 +25,5 @@ test("リンクが正しく設定されていること", () => {
   const linkElement = screen.getByRole("link");
 
   // then
-  expect(linkElement).toHaveAttribute("href", "/user/article/1");
+  expect(linkElement).toHaveAttribute("href", "/user/article/detail/1");
 });
