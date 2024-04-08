@@ -6,15 +6,18 @@ import { Input } from "@/lib/components/ui/input";
 import { Textarea } from "@/lib/components/ui/textarea";
 import { ArticleMarkDownEditor } from "@/features/article/components/ArticleMarkDownEditor/article-mark-down-editor";
 import { useRouter } from "next/navigation";
+import { createArticle } from "@/features/article/actions";
 
 export function UserArticleCreate() {
   const { back } = useRouter();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [text, setText] = useState('');
+  const [error, setError] = useState('');
 
   return (
     <div className="container grid px-4 md:px-6">
+      {error && <div className="text-red-500">{error}</div>}
       <div className="flex justify-end">
         <Button
           variant="link"
@@ -28,8 +31,12 @@ export function UserArticleCreate() {
         <Button
           className="ml-2"
           variant="outline"
-          onClick={() => {
+          onClick={async () => {
             // TODO: 保存処理
+            const error = await createArticle({ title, description, text });
+            if (error) {
+              setError(error);
+            }
           }}
         >
           Save
