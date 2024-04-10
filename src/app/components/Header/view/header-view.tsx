@@ -3,17 +3,16 @@ import Link from "next/link";
 import { ActionMenu } from "../../ActionMenu/action-menu";
 
 type Props = {
-  pathName: string;
   isLogin: boolean;
   email?: string;
 };
 
-export function HeaderView({ pathName, isLogin, email }: Props) {
+export function HeaderView({ isLogin, email }: Props) {
   return (
     <header className="border-b top-0 left-0 w-full bg-white dark:bg-gray-900 dark:border-gray-800 z-100 h-20">
       <div className="container py-4 md:py-6 pt-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold tracking-tighter">{pathName}</h1>
+          <h1 className="text-2xl font-bold tracking-tighter">DevDiary</h1>
           {isLogin ? (
             <ActionMenu email={email} />
           ) : (
