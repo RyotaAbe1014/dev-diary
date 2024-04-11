@@ -1,6 +1,8 @@
 export type UserArticle = {
-    id: string
-    title: string
-    publishedAt?: string
-    description?: string
+    id: number;
+    userId: string;
+    title: string;
+    description?: string;
+    body?: string;
+    isPublish?: string;
 }
