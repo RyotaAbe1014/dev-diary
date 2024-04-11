@@ -1,32 +1,20 @@
-'use client';
 
-import { useState } from "react";
-import { UserArticleDetail  as  UserArticleDetailType} from "@/features/article/types/UserArticleDetail";
-import { UserArticleDetailDialogContent } from "../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
-import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { UserArticleDetailView } from "./view/UserArticleDetailView";
+import { UserArticle } from "@/features/article/types/UserArticle";
+import { camelizeDeeply } from "@/utils/camelizeDeeply/camelizeDeeply";
 
 type UserArticleDetailProps = {
-  articleDetail: UserArticleDetailType;
+  articleId: string;
 };
 
-export function UserArticleDetail({ articleDetail }: UserArticleDetailProps) {
-  const [isEdit, setIsEdit] = useState(false);
-  const router = useRouter();
-
-  const handleSave = () => {
-    // TODO: Save action
-    setIsEdit(false);
-    router.back();
-  };
-
-  const handleDelete = () => {
-    // TODO: Delete action
-    router.back();
-  };
-
+export async function UserArticleDetail({ articleId }: UserArticleDetailProps) {
+  const supabase = createClient();
+  const { data, error } = await supabase.from('articles').select('*').eq('id', articleId);
+  if (error) {
+    throw error;
+  }
   return (
-    <>
-    <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
-    </>
+    <UserArticleDetailView article={camelizeDeeply(data[0]) as UserArticle} />
   )
 }

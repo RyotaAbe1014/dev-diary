@@ -1,44 +1,19 @@
-'use client';
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-} from "@/lib/components/ui/dialog";
-import { UserArticleDetail } from "@/features/article/types/UserArticleDetail";
-import { UserArticleDetailDialogContent } from "../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
+import { createClient } from "@/lib/supabase/server";
+import { UserArticleDetailDialogView } from "./view/UserArticleDetailDialog";
+import { camelizeDeeply } from "@/utils/camelizeDeeply/camelizeDeeply";
+import { UserArticle } from "@/features/article/types/UserArticle";
 
 type UserArticleDetailDialogProps = {
-  articleDetail: UserArticleDetail;
+  articleId: string;
 };
 
-export function UserArticleDetailDialog({ articleDetail }: UserArticleDetailDialogProps) {
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(true);
-  const [isEdit, setIsEdit] = useState(false);
-
-
-  const handleSave = () => {
-    // TODO: Save action
-    setIsEdit(false);
-  };
-  const handleDelete = () => {
-    // TODO: Delete action
-    router.back();
-  };
-
+export async function UserArticleDetailDialog({ articleId }: UserArticleDetailDialogProps) {
+  const supabase = createClient();
+  const { data, error } = await supabase.from('articles').select('*').eq('id', articleId);
+  if (error) {
+    throw error;
+  }
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={() => {
-        setIsOpen(false);
-        router.back();
-      }}
-    >
-      <DialogContent className="min-w-full">
-        <UserArticleDetailDialogContent articleDetail={articleDetail} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
-      </DialogContent>
-    </Dialog>
+    <UserArticleDetailDialogView article={camelizeDeeply(data[0]) as UserArticle} />
   )
 }

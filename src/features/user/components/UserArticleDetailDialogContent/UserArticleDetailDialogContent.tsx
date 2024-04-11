@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { ArticleMarkDownEditor } from "@/features/article/components/ArticleMarkDownEditor/article-mark-down-editor";
-import { UserArticleDetail } from "@/features/article/types/UserArticleDetail";
 import { MarkDown } from "@/lib/react-markdown/components/MarkDown/MarkDown";
 import { Button } from "@/lib/components/ui/button";
 import { Input } from "@/lib/components/ui/input";
 import { Textarea } from "@/lib/components/ui/textarea";
+import { UserArticle } from "@/features/article/types/UserArticle";
 
 type UserArticleDetailDialogProps = {
-  articleDetail: UserArticleDetail;
+  articleDetail: UserArticle;
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
   handleSave: () => void;
@@ -18,8 +18,8 @@ type UserArticleDetailDialogProps = {
 
 export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdit, handleSave, handleDelete }: UserArticleDetailDialogProps) {
   const [title, setTitle] = useState(articleDetail.title);
-  const [description, setDescription] = useState(articleDetail.description);
-  const [text, setText] = useState(articleDetail.content);
+  const [description, setDescription] = useState(articleDetail.description || '');
+  const [text, setText] = useState(articleDetail.body || '');
 
   return (
     <div className="container grid px-4 md:px-6">
