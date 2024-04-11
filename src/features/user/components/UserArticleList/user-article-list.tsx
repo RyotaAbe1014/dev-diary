@@ -13,8 +13,11 @@ export async function UserArticleList() {
     return;
   }
 
-  const {data, error} = await supabase.from('articles').select('*').filter('user_id', 'eq', user.id);
-  console.log(data);
+  const {data, error} = await supabase.from('articles').select('*').eq('user_id', user.id);
+
+  if (error) {
+    throw error;
+  }
   return (
     <UserArticleListView userArticles={data as UserArticle[]} />
   )
