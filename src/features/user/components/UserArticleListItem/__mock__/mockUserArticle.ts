@@ -1,6 +1,8 @@
-export const mockUserArticle = {
+import { camelizeDeeply } from "@/utils/camelizeDeeply/camelizeDeeply";
+
+export const mockUserArticle = camelizeDeeply({
     id: 1,
-    userId: '0ee0eb25-4ea9-42a8-8c97-4be860a3c18b',
+    user_id: '0ee0eb25-4ea9-42a8-8c97-4be860a3c18b',
     title: 'Supabaseに値を入れる方法',
     body: '### Supabaseに値を入れる\n' +
         '```js\n' +
@@ -40,7 +42,7 @@ export const mockUserArticle = {
         "  redirect('/user/article');\n" +
         '}\n' +
         '```',
-    isPublic: false,
+    is_public: false,
     inserted_at: '2024-04-08T15:54:11.421427+00:00',
     description: '使ってみたシリーズ'
-};
+});

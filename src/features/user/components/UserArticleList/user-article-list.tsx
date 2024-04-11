@@ -2,6 +2,7 @@ import { logout } from "@/features/auth/actions/logout";
 import { createClient } from "@/lib/supabase/server";
 import { UserArticleListView } from "./view/user-article-list-view";
 import { UserArticle } from "@/features/article/types/UserArticle";
+import { camelizeDeeply } from "@/utils/camelizeDeeply/camelizeDeeply";
 
 export async function UserArticleList() {
   const supabase = createClient();
@@ -19,6 +20,6 @@ export async function UserArticleList() {
     throw error;
   }
   return (
-    <UserArticleListView userArticles={data as UserArticle[]} />
+    <UserArticleListView userArticles={camelizeDeeply(data) as UserArticle[]} />
   )
 }
