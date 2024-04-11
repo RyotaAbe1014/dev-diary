@@ -37,7 +37,6 @@ export function UserArticleCreate() {
           className="ml-2"
           variant="outline"
           onClick={async () => {
-            // TODO: 保存処理
             const error = await createArticle({ title, description, text });
             if (error) {
               setError(error);
