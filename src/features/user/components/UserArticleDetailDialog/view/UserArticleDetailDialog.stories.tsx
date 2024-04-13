@@ -1,29 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserArticleDetailDialog } from './UserArticleDetailDialog';
+import { UserArticleDetailDialogView } from './UserArticleDetailDialog';
+import { mockUserArticle } from '../../UserArticleListItem/__mock__/mockUserArticle';
 
-const meta: Meta<typeof UserArticleDetailDialog> = {
+const meta: Meta<typeof UserArticleDetailDialogView> = {
   title: "features/user/UserArticleDetailDialog",
   parameters: {
     nextjs: {
       appDirectory: true,
     }
   },
-  component: UserArticleDetailDialog,
+  component: UserArticleDetailDialogView,
 };
 
 export default meta;
-type Story = StoryObj<typeof UserArticleDetailDialog>;
+type Story = StoryObj<typeof UserArticleDetailDialogView>;
 
 export const Primary: Story = {
   args: {
-    articleDetail: {
-      id: "1",
-      title: "title",
-      publishedAt: "2021-01-01",
-      description: "description",
-      content: "# content",
-    },
+    article: mockUserArticle,
   },
 
-  render: ({articleDetail}) => <UserArticleDetailDialog  articleDetail={articleDetail} />,
+  render: ({ article }) => <UserArticleDetailDialogView article={article} />,
 };
