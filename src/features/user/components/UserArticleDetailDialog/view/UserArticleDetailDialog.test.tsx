@@ -1,7 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { UserArticleDetailDialog } from "./UserArticleDetailDialog";
 import { vi } from "vitest";
 import { useRouter } from "next/navigation";
+import { UserArticleDetailDialogView } from "./UserArticleDetailDialog";
+import { mockUserArticle } from "../../UserArticleListItem/__mock__/mockUserArticle";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
@@ -10,19 +11,21 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("UserArticleDetailDialog", () => {
-  const articleDetail = {
-    id: "1",
-    title: "Sample Title",
-    description: "Sample Description",
-    content: "Sample Content",
-  };
+  const articleDetail = mockUserArticle;
 
   test("記事の詳細が表示される", () => {
-    render(<UserArticleDetailDialog articleDetail={articleDetail} />);
+    const mock = {
+      ...mockUserArticle,
+      title: "Supabaseに値を入れる方法",
+      description: "使ってみたシリーズ",
+      body: "Test Content",
+    };
 
-    const titleElement = screen.getByText(articleDetail.title);
-    const descriptionElement = screen.getByText(articleDetail.description);
-    const contentElement = screen.getByText(articleDetail.content);
+    render(<UserArticleDetailDialogView article={mock} />);
+
+    const titleElement = screen.getByText(mock.title);
+    const descriptionElement = screen.getByText(mock.description);
+    const contentElement = screen.getByText(mock.body);
 
     expect(titleElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
@@ -30,7 +33,7 @@ describe("UserArticleDetailDialog", () => {
   });
 
   test("Editボタンをクリックすると編集モードになる", () => {
-    render(<UserArticleDetailDialog articleDetail={articleDetail} />);
+    render(<UserArticleDetailDialogView article={articleDetail} />);
 
     const editButton = screen.getByText("Edit");
     fireEvent.click(editButton);
@@ -40,7 +43,7 @@ describe("UserArticleDetailDialog", () => {
   });
 
   test("Saveボタンをクリックすると編集モードが解除される", () => {
-    render(<UserArticleDetailDialog articleDetail={articleDetail} />);
+    render(<UserArticleDetailDialogView article={articleDetail} />);
 
     const editButton = screen.getByText("Edit");
     fireEvent.click(editButton);
@@ -53,7 +56,7 @@ describe("UserArticleDetailDialog", () => {
   });
 
   test.skip("Deleteボタンをクリックすると記事が削除される", () => {
-    render(<UserArticleDetailDialog articleDetail={articleDetail} />);
+    render(<UserArticleDetailDialogView article={articleDetail} />);
 
     const deleteButton = screen.getByText("Delete");
     fireEvent.click(deleteButton);
