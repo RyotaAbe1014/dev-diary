@@ -1,6 +1,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { UserArticleDetailDialogContent } from './UserArticleDetailDialogContent';
+import { mockUserArticle } from '../UserArticleListItem/__mock__/mockUserArticle';
 
 
 const meta: Meta<typeof UserArticleDetailDialogContent> = {
@@ -13,16 +14,11 @@ type Story = StoryObj<typeof UserArticleDetailDialogContent>;
 
 export const Preview: Story = {
   args: {
-    articleDetail: {
-      id: "1",
-      title: "Hello World",
-      description: "This is a sample article",
-      content: "# Hello World \n This is a markdown component. \n ```javascript \n console.log('Hello, World!'); \n ```",
-    },
+    articleDetail: mockUserArticle,
     isEdit: false,
-    setIsEdit: () => {},
-    handleSave: () => {},
-    handleDelete: () => {},
+    setIsEdit: () => { },
+    handleSave: () => { },
+    handleDelete: () => { },
   },
 
   render: (args) => <UserArticleDetailDialogContent  {...args} />,
@@ -30,16 +26,11 @@ export const Preview: Story = {
 
 export const Edit: Story = {
   args: {
-    articleDetail: {
-      id: "1",
-      title: "Hello World",
-      description: "This is a sample article",
-      content: "# Hello World \n This is a markdown component. \n ```javascript \n console.log('Hello, World!'); \n ```",
-    },
+    articleDetail: mockUserArticle,
     isEdit: true,
-    setIsEdit: () => {},
-    handleSave: () => {},
-    handleDelete: () => {},
+    setIsEdit: () => { },
+    handleSave: () => { },
+    handleDelete: () => { },
   },
 
   render: (args) => <UserArticleDetailDialogContent  {...args} />,
