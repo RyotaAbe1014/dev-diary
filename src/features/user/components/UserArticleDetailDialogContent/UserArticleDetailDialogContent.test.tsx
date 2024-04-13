@@ -1,15 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import { UserArticleDetailDialogContent } from './UserArticleDetailDialogContent';
+import { mockUserArticle } from '../UserArticleListItem/__mock__/mockUserArticle';
 
 describe('UserArticleDetailDialogContent', () => {
-  const mockArticleDetail = {
-    id: '1',
-    title: 'Test Title',
-    description: 'Test Description',
-    content: 'Test Content',
-  };
-
+  const mockArticleDetail = mockUserArticle;
   const mockHandleSave = vi.fn();
   const mockHandleDelete = vi.fn();
   const setIsEdit = vi.fn();
@@ -17,12 +12,11 @@ describe('UserArticleDetailDialogContent', () => {
   it('テキストが表示されること', () => {
     // given
     const mockArticleDetail = {
-      id: '1',
-      title: 'Test Title',
-      description: 'Test Description',
-      content: 'Test Content',
-    };
-
+      ...mockUserArticle,
+      title: 'Supabaseに値を入れる方法',
+      description: '使ってみたシリーズ',
+      body: 'Test Content',
+    }
     // when
     const { getByText } = render(
       <UserArticleDetailDialogContent
@@ -35,8 +29,8 @@ describe('UserArticleDetailDialogContent', () => {
     );
 
     // then
-    expect(getByText('Test Title')).toBeInTheDocument();
-    expect(getByText('Test Description')).toBeInTheDocument();
+    expect(getByText('Supabaseに値を入れる方法')).toBeInTheDocument();
+    expect(getByText('使ってみたシリーズ')).toBeInTheDocument();
     expect(getByText('Test Content')).toBeInTheDocument();
   });
 
