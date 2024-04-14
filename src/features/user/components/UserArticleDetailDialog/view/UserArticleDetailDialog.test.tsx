@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
-import { useRouter } from "next/navigation";
 import { UserArticleDetailDialogView } from "./UserArticleDetailDialog";
 import { mockUserArticle } from "../../UserArticleListItem/__mock__/mockUserArticle";
 import { deleteArticle } from "@/features/article/actions";
 
+const back = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
-    back: vi.fn(),
+    back: back
   }),
 }));
 
@@ -45,6 +45,7 @@ describe("UserArticleDetailDialog", () => {
 
     const titleElement = screen.queryByText(articleDetail.title);
     expect(titleElement).not.toBeInTheDocument();
+    expect(back).toHaveBeenCalled();
   });
 
   test("Editボタンをクリックすると編集モードになる", () => {
