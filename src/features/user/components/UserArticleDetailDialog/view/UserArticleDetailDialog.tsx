@@ -8,6 +8,7 @@ import {
 } from "@/lib/components/ui/dialog";
 import { UserArticle } from "@/features/article/types/UserArticle";
 import { UserArticleDetailDialogContent } from "../../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
+import { deleteArticle } from "@/features/article/actions";
 
 type UserArticleDetailDialogViewProps = {
   article: UserArticle;
@@ -23,8 +24,9 @@ export function UserArticleDetailDialogView({ article }: UserArticleDetailDialog
     // TODO: Save action
     setIsEdit(false);
   };
-  const handleDelete = () => {
-    // TODO: Delete action
+  const handleDelete = async () => {
+    const error = await deleteArticle(article.id);
+    console.log(error);
     router.back();
   };
 
