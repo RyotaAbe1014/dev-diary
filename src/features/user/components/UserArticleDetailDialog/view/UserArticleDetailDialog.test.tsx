@@ -3,11 +3,16 @@ import { vi } from "vitest";
 import { useRouter } from "next/navigation";
 import { UserArticleDetailDialogView } from "./UserArticleDetailDialog";
 import { mockUserArticle } from "../../UserArticleListItem/__mock__/mockUserArticle";
+import { deleteArticle } from "@/features/article/actions";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     back: vi.fn(),
   }),
+}));
+
+vi.mock("@/features/article/actions", () => ({
+  deleteArticle: vi.fn(),
 }));
 
 describe("UserArticleDetailDialog", () => {
@@ -55,13 +60,12 @@ describe("UserArticleDetailDialog", () => {
     expect(cancelButton).not.toBeInTheDocument();
   });
 
-  test.skip("Deleteボタンをクリックすると記事が削除される", () => {
+  test("Deleteボタンをクリックすると記事が削除される", () => {
     render(<UserArticleDetailDialogView article={articleDetail} />);
 
     const deleteButton = screen.getByText("Delete");
     fireEvent.click(deleteButton);
 
-    // TODO: アクションの関数をmockしてテストする
-    // expect().toHaveBeenCalled();
+    expect(deleteArticle).toHaveBeenCalledWith(1);
   });
 });
