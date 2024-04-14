@@ -1,25 +1,17 @@
-import { logout } from "@/features/auth/actions/logout";
-import { createClient } from "@/lib/supabase/server";
+import { getArticleList } from "@/features/article/actions";
 import { UserArticleListView } from "./view/user-article-list-view";
-import { UserArticle } from "@/features/article/types/UserArticle";
 import { camelizeDeeply } from "@/utils/camelizeDeeply/camelizeDeeply";
+import { unstable_cache } from "next/cache";
+
+
+const cachedUserArticleList = unstable_cache(getArticleList, ['userArticleList'], { tags: ['userArticleList'], revalidate: 1});
 
 export async function UserArticleList() {
-  const supabase = createClient();
-  const userResponse = await supabase.auth.getUser();
-  const user = userResponse.data.user;
-
-  if (!user) {
-    await logout();
-    return;
-  }
-
-  const {data, error} = await supabase.from('articles').select('*').eq('user_id', user.id);
-
-  if (error) {
-    throw error;
+  const data = await cachedUserArticleList();
+  if (!data) {
+    return null;
   }
   return (
-    <UserArticleListView userArticles={camelizeDeeply(data) as UserArticle[]} />
+    <UserArticleListView userArticles={camelizeDeeply(data)} />
   )
 }
