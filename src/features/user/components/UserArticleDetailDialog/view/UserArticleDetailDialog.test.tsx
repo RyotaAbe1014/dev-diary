@@ -37,6 +37,16 @@ describe("UserArticleDetailDialog", () => {
     expect(contentElement).toBeInTheDocument();
   });
 
+  test('closeボタンをクリックするとダイアログが閉じる', () => {
+    render(<UserArticleDetailDialogView article={articleDetail} />);
+
+    const closeButton = screen.getByText("Close");
+    fireEvent.click(closeButton);
+
+    const titleElement = screen.queryByText(articleDetail.title);
+    expect(titleElement).not.toBeInTheDocument();
+  });
+
   test("Editボタンをクリックすると編集モードになる", () => {
     render(<UserArticleDetailDialogView article={articleDetail} />);
 
