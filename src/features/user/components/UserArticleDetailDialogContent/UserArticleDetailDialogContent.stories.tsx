@@ -19,6 +19,7 @@ export const Preview: Story = {
     setIsEdit: () => { },
     handleSave: () => { },
     handleDelete: () => { },
+    changePublishStatus: () => { },
   },
 
   render: (args) => <UserArticleDetailDialogContent  {...args} />,
@@ -31,6 +32,7 @@ export const Edit: Story = {
     setIsEdit: () => { },
     handleSave: () => { },
     handleDelete: () => { },
+    changePublishStatus: () => { },
   },
 
   render: (args) => <UserArticleDetailDialogContent  {...args} />,

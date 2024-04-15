@@ -7,7 +7,9 @@ describe('UserArticleDetailDialogContent', () => {
   const mockArticleDetail = mockUserArticle;
   const mockHandleSave = vi.fn();
   const mockHandleDelete = vi.fn();
+  const mockChangePublishStatus = vi.fn();
   const setIsEdit = vi.fn();
+
 
   it('テキストが表示されること', () => {
     // given
@@ -25,6 +27,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
 
@@ -46,6 +49,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
     fireEvent.click(getByText('Edit'));
@@ -64,6 +68,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
 
@@ -83,6 +88,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
 
@@ -105,6 +111,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
     fireEvent.click(getByText('Cancel'));
@@ -122,6 +129,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
     const titleInput = getByPlaceholderText('Title') as HTMLInputElement;
@@ -142,6 +150,7 @@ describe('UserArticleDetailDialogContent', () => {
         setIsEdit={setIsEdit}
         handleSave={mockHandleSave}
         handleDelete={mockHandleDelete}
+        changePublishStatus={mockChangePublishStatus}
       />
     );
     const descriptionInput = getByPlaceholderText('Description') as HTMLTextAreaElement;
