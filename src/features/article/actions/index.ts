@@ -38,7 +38,7 @@ export async function createArticle({ title, description, text }: { title: strin
   if (error) {
     return [error.message];
   }
-  revalidateTag('userArticleList');
+  revalidatePath('/user/article');
   redirect('/user/article');
 };
 
@@ -69,7 +69,7 @@ export async function deleteArticle(articleId: number) {
   if (error) {
     return [error.message];
   }
-  revalidateTag('userArticleList');
+  revalidatePath('/user/article');
 };
 
 export async function updateArticle(title: string, description: string, text: string) {
@@ -83,6 +83,16 @@ export async function updateArticle(title: string, description: string, text: st
   }
 
   const { error } = await supabase.from('articles').update({ title, description, body: text }).eq('user_id', user.id);
+
+  if (error) {
+    return [error.message];
+  }
+  revalidatePath('/user/article');
+}
+
+export async function updatePublishStatus(articleId: number, isPublish: boolean) {
+  const supabase = createClient();
+  const { error } = await supabase.from('articles').update({ is_public: isPublish }).eq('id', articleId);
 
   if (error) {
     return [error.message];
