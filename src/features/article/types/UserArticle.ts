@@ -4,5 +4,5 @@ export type UserArticle = {
     title: string;
     description?: string;
     body?: string;
-    isPublish?: string;
+    isPublic: boolean;
 }
