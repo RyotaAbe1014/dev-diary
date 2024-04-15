@@ -4,7 +4,7 @@ import { useState } from "react";
 import { UserArticleDetailDialogContent } from "../../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
 import { useRouter } from "next/navigation";
 import { UserArticle } from "@/features/article/types/UserArticle";
-import { deleteArticle, updateArticle } from "@/features/article/actions";
+import { deleteArticle, updateArticle, updatePublishStatus } from "@/features/article/actions";
 
 type UserArticleDetailViewProps = {
   article: UserArticle;
@@ -24,9 +24,14 @@ export function UserArticleDetailView({ article }: UserArticleDetailViewProps) {
     router.back();
   };
 
+  const changePublishStatus = async () => {
+    const error = await updatePublishStatus(article.id, !article.isPublic);
+    console.log(error);
+  }
+
   return (
     <>
-      <UserArticleDetailDialogContent articleDetail={article} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
+      <UserArticleDetailDialogContent articleDetail={article} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} changePublishStatus={changePublishStatus} />
     </>
   )
 }

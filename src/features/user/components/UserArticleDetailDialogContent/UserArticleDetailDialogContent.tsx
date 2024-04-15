@@ -7,6 +7,8 @@ import { Button } from "@/lib/components/ui/button";
 import { Input } from "@/lib/components/ui/input";
 import { Textarea } from "@/lib/components/ui/textarea";
 import { UserArticle } from "@/features/article/types/UserArticle";
+import { Checkbox } from "@/lib/components/ui/checkbox";
+import { CheckboxWithLabel } from "@/lib/components/ui/CheckboxWithText/CheckboxWithText";
 
 type UserArticleDetailDialogProps = {
   articleDetail: UserArticle;
@@ -14,17 +16,26 @@ type UserArticleDetailDialogProps = {
   setIsEdit: (isEdit: boolean) => void;
   handleSave: (title: string, description: string, text: string) => void;
   handleDelete: () => void;
+  changePublishStatus: () => void;
 };
 
-export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdit, handleSave, handleDelete }: UserArticleDetailDialogProps) {
+export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdit, handleSave, handleDelete, changePublishStatus }: UserArticleDetailDialogProps) {
   const [title, setTitle] = useState(articleDetail.title);
   const [description, setDescription] = useState(articleDetail.description || '');
   const [text, setText] = useState(articleDetail.body || '');
+  const [isPublish, setIsPublish] = useState(articleDetail.isPublic || false);
+
+  const handlePublish = () => {
+    changePublishStatus();
+    setIsPublish(!isPublish);
+  }
 
   return (
     <div className="container grid px-4 md:px-6">
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center">
+        <CheckboxWithLabel value={isPublish} label={isPublish ? "Unpublish" : "Publish"} onClick={handlePublish} />
         <Button
+          className="ml-2"
           onClick={() => {
             setIsEdit(!isEdit);
           }}
@@ -41,7 +52,7 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
           >
             Save
           </Button>
-        ) :
+        ) : (
           <Button
             className="ml-2"
             variant="destructive"
@@ -50,7 +61,8 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
             }}
           >
             Delete
-          </Button>}
+          </Button>
+        )}
       </div>
       <div className="h-36">
         {isEdit ? (

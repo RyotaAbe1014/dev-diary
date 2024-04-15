@@ -8,7 +8,7 @@ import {
 } from "@/lib/components/ui/dialog";
 import { UserArticle } from "@/features/article/types/UserArticle";
 import { UserArticleDetailDialogContent } from "../../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
-import { deleteArticle, updateArticle } from "@/features/article/actions";
+import { deleteArticle, updateArticle, updatePublishStatus } from "@/features/article/actions";
 
 type UserArticleDetailDialogViewProps = {
   article: UserArticle;
@@ -29,6 +29,11 @@ export function UserArticleDetailDialogView({ article }: UserArticleDetailDialog
     router.back();
   };
 
+  const changePublishStatus = async () => {
+    const error = await updatePublishStatus(article.id, !article.isPublic);
+    console.log(error);
+  }
+
   return (
     <Dialog
       open={isOpen}
@@ -38,7 +43,7 @@ export function UserArticleDetailDialogView({ article }: UserArticleDetailDialog
       }}
     >
       <DialogContent className="min-w-full">
-        <UserArticleDetailDialogContent articleDetail={article} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} />
+        <UserArticleDetailDialogContent articleDetail={article} isEdit={isEdit} setIsEdit={setIsEdit} handleSave={handleSave} handleDelete={handleDelete} changePublishStatus={changePublishStatus} />
       </DialogContent>
     </Dialog>
   )
