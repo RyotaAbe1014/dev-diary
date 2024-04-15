@@ -12,7 +12,7 @@ type UserArticleDetailDialogProps = {
   articleDetail: UserArticle;
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
-  handleSave: () => void;
+  handleSave: (title: string, description: string, text: string) => void;
   handleDelete: () => void;
 };
 
@@ -36,7 +36,7 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
             className="ml-2"
             variant="outline"
             onClick={() => {
-              handleSave();
+              handleSave(title, description, text);
             }}
           >
             Save

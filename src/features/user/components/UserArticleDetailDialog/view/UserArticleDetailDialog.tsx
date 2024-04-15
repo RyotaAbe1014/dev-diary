@@ -8,7 +8,7 @@ import {
 } from "@/lib/components/ui/dialog";
 import { UserArticle } from "@/features/article/types/UserArticle";
 import { UserArticleDetailDialogContent } from "../../UserArticleDetailDialogContent/UserArticleDetailDialogContent";
-import { deleteArticle } from "@/features/article/actions";
+import { deleteArticle, updateArticle } from "@/features/article/actions";
 
 type UserArticleDetailDialogViewProps = {
   article: UserArticle;
@@ -19,9 +19,8 @@ export function UserArticleDetailDialogView({ article }: UserArticleDetailDialog
   const [isOpen, setIsOpen] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
 
-
-  const handleSave = () => {
-    // TODO: Save action
+  const handleSave = async (title: string, description: string, text: string) => {
+    const error = await updateArticle(title, description, text);
     setIsEdit(false);
   };
   const handleDelete = async () => {
