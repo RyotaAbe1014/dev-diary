@@ -1,6 +1,6 @@
 'use server';
 import { redirect } from "next/navigation";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag, unstable_noStore } from "next/cache";
 
 import { logout } from "@/features/auth/actions/logout";
 import { createClient } from "@/lib/supabase/server";
@@ -43,6 +43,7 @@ export async function createArticle({ title, description, text }: { title: strin
 };
 
 export async function getArticleList() {
+  unstable_noStore();
   const supabase = createClient();
   const userResponse = await supabase.auth.getUser();
   const user = userResponse.data.user;
@@ -70,3 +71,21 @@ export async function deleteArticle(articleId: number) {
   }
   revalidateTag('userArticleList');
 };
+
+export async function updateArticle(title: string, description: string, text: string) {
+  const supabase = createClient();
+  const userResponse = await supabase.auth.getUser();
+  const user = userResponse.data.user;
+
+  if (!user) {
+    await logout();
+    return;
+  }
+
+  const { error } = await supabase.from('articles').update({ title, description, body: text }).eq('user_id', user.id);
+
+  if (error) {
+    return [error.message];
+  }
+  revalidatePath('/user/article');
+}
