@@ -8,7 +8,7 @@ import { Input } from "@/lib/components/ui/input";
 import { Textarea } from "@/lib/components/ui/textarea";
 import { UserArticle } from "@/features/article/types/UserArticle";
 import { Checkbox } from "@/lib/components/ui/checkbox";
-import { CheckboxWithLabel } from "@/lib/components/ui/CheckboxWithText/CheckboxWithText";
+import { CheckboxWithLabel } from "@/lib/components/ui/CheckboxWithLabel/CheckboxWithLabel";
 
 type UserArticleDetailDialogProps = {
   articleDetail: UserArticle;
