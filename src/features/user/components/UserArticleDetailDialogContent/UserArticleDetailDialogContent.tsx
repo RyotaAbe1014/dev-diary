@@ -84,7 +84,7 @@ export function UserArticleDetailDialogContent({ articleDetail, isEdit, setIsEdi
         {isEdit ? (
           <ArticleMarkDownEditor value={text} onChange={setText} />
         ) : (
-          <MarkDown value={text} className="p-4 h-full rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto" />
+          <MarkDown value={articleDetail.body} className="p-4 h-full rounded-lg border border-slate-200 dark:border-slate-800 overflow-y-auto overflow-x-auto" />
         )}
       </div>
     </div>
