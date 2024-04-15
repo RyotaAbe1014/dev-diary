@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
 import { UserArticleDetailDialogView } from "./UserArticleDetailDialog";
 import { mockUserArticle } from "../../UserArticleListItem/__mock__/mockUserArticle";
-import { deleteArticle } from "@/features/article/actions";
+import { deleteArticle, updateArticle } from "@/features/article/actions";
 
 const back = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -13,6 +13,7 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("@/features/article/actions", () => ({
   deleteArticle: vi.fn(),
+  updateArticle: vi.fn(),
 }));
 
 describe("UserArticleDetailDialog", () => {
@@ -58,7 +59,7 @@ describe("UserArticleDetailDialog", () => {
     expect(cancelButton).toBeInTheDocument();
   });
 
-  test("Saveボタンをクリックすると編集モードが解除される", () => {
+  test("Saveボタンをクリックすると編集モードが解除される", async () => {
     render(<UserArticleDetailDialogView article={articleDetail} />);
 
     const editButton = screen.getByText("Edit");
@@ -67,8 +68,21 @@ describe("UserArticleDetailDialog", () => {
     const saveButton = screen.getByText("Save");
     fireEvent.click(saveButton);
 
-    const cancelButton = screen.queryByText("Cancel");
-    expect(cancelButton).not.toBeInTheDocument();
+    await vi.waitFor(() => {
+      expect(screen.queryByText("Cancel")).not.toBeInTheDocument();
+    });
+  });
+
+  test("SaveボタンをクリックするとupdateArticleが呼ばれる", () => {
+    render(<UserArticleDetailDialogView article={articleDetail} />);
+
+    const editButton = screen.getByText("Edit");
+    fireEvent.click(editButton);
+
+    const saveButton = screen.getByText("Save");
+    fireEvent.click(saveButton);
+
+    expect(updateArticle).toHaveBeenCalledWith(articleDetail.title, articleDetail.description, articleDetail.body);
   });
 
   test("Deleteボタンをクリックすると記事が削除される", () => {
