@@ -18,7 +18,7 @@ export function UserArticleListItem({ userArticle }: UserArticleListItemProps) {
     >
       <div className="grid items-start gap-1">
         <h2 className="text-xl font-semibold">{userArticle.title}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{userArticle.isPublish ? 'publish' : null}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{userArticle.isPublic ? 'publish' : null}</p>
         <p className="text-sm">{userArticle.description}</p>
       </div>
     </Link>
